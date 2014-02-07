@@ -14,11 +14,17 @@ lib_build_params=../out/heaploop.a ../out/webcaret-router.a -I../out/di ../deps/
 
 build: deeq-api
 
+run: cleandeps deeq-api
+	out/./deeq-api
+
 deeq-api: lib/**/*.d deps/heaploop deps/webcaret-router
 	mkdir -p out
 	cd lib; $(DC) -of../out/deeq-api -op app.d webcaret/*.d $(lib_build_params) $(DFLAGS)
 
-.PHONY: clean
+cleandeps:
+	rm -rf deps/*
+
+.PHONY: clean cleandeps
 
 deps/heaploop:
 	@echo "Compiling deps/heaploop"
