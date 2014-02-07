@@ -20,6 +20,7 @@ run: cleandeps deeq-api
 deeq-api: lib/**/*.d deps/heaploop deps/webcaret-router
 	mkdir -p out
 	cd lib; $(DC) -of../out/deeq-api -op app.d webcaret/*.d $(lib_build_params) $(DFLAGS)
+	out/./deeq-api
 
 cleandeps:
 	rm -rf deps/*
