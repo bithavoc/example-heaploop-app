@@ -10,16 +10,16 @@ endif
 ifeq (${OS_NAME},Darwin)
 	DFLAGS+=-L-framework -LCoreServices 
 endif
-lib_build_params=../out/heaploop.a ../out/webcaret-router.a -I../out/di ../deps/heaploop/out/duv.a ../deps/heaploop/out/uv.a ../deps/heaploop/out/http-parser.a ../deps/heaploop/out/events.d.a
+lib_build_params= -I../out/di ../out/webcaret.a
 
 build: deeq-api
 
 run: cleandeps deeq-api
 	out/./deeq-api
 
-deeq-api: lib/**/*.d deps/heaploop deps/webcaret-router
+deeq-api: lib/**/*.d deps/webcaret
 	mkdir -p out
-	cd lib; $(DC) -of../out/deeq-api -op app.d webcaret/*.d $(lib_build_params) $(DFLAGS)
+	cd lib; $(DC) -of../out/deeq-api -op app.d $(lib_build_params) $(DFLAGS)
 	out/./deeq-api
 
 cleandeps:
@@ -27,25 +27,14 @@ cleandeps:
 
 .PHONY: clean cleandeps
 
-deps/heaploop:
-	@echo "Compiling deps/heaploop"
-	git submodule update --init --remote deps/heaploop
-	rm -rf deps/heaploop/deps/duv
-	rm -rf deps/heaploop/deps/events.d
-	rm -rf deps/heaploop/deps/http-parser.d
+deps/webcaret:
+	@echo "Compiling deps/webcaret"
+	git submodule update --init --remote deps/webcaret
 	mkdir -p out
-	DEBUG=${DEBUG} $(MAKE) -C deps/heaploop
-	cp deps/heaploop/out/heaploop.a out/
-	cp -r deps/heaploop/out/di/ out/di
-
-deps/webcaret-router:
-	@echo "Compiling deps/webcaret-router"
-	git submodule update --init --remote deps/webcaret-router
-	rm -rf deps/webcaret-router/deps/events.d
-	mkdir -p out
-	(cd deps/webcaret-router ; DEBUG=${DEBUG} $(MAKE) )
-	cp deps/webcaret-router/out/webcaret-router.a out/
-	cp -r deps/webcaret-router/out/di/ out/di
+	DEBUG=${DEBUG} $(MAKE) -C deps/webcaret clean
+	DEBUG=${DEBUG} $(MAKE) -C deps/webcaret
+	cp deps/webcaret/out/webcaret.a out/
+	cp -r deps/webcaret/out/di/ out/di
 
 clean:
 	rm -rf out/*

@@ -1,6 +1,3 @@
-[submodule "deps/webcaret-router"]
-	path = deps/webcaret-router
-	url = git@github.com:heapsource/webcaret-router.git
-[submodule "deps/heaploop"]
-	path = deps/heaploop
-	url = git@github.com:heapsource/heaploop.git
+[submodule "deps/webcaret"]
+	path = deps/webcaret
+	url = git@github.com:heapsource/webcaret.git
