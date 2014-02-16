@@ -1,0 +1,16 @@
+echo "Current dir: $PWD"
+echo "BUILD DIR: $1"
+ls $1
+cd $1
+echo "Initializing git in $PWD"
+rm -rf .git
+git init
+git add -A
+git commit -m "Initial Commit"
+echo "Listing all the files after git init"
+ls -a
+#git submodule add https://github.com/heapsource/webcaret.git deps/webcaret
+#git submodule add https://github.com/heapsource/couche.d.git deps/couche.d
+make
+ls out
+exit 1

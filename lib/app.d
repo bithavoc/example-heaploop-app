@@ -5,7 +5,7 @@ import couched;
 import std.json;
 
 void main() {
-    loop ^^ {
+    loop ^^= {
         auto client = new CouchedClient("http://127.0.0.1:5984");
         CouchedDatabase tags = client.databases.tags;
         tags.ensure();
