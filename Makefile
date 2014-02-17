@@ -27,8 +27,8 @@ deeq-api: lib/*.d deps/webcaret/out deps/couche.d/out
 deps/webcaret/out:
 	@echo "Compiling deps/webcaret"
 	#git submodule update --init deps/webcaret
-	#(cd deps/webcaret; git checkout master)
-	#(cd deps/webcaret; git pull origin master)
+	(cd deps/webcaret; git checkout master)
+	(cd deps/webcaret; git pull origin master)
 	mkdir -p out
 	DEBUG=${DEBUG} $(MAKE) -C deps/webcaret clean
 	DEBUG=${DEBUG} $(MAKE) -n -C deps/webcaret
@@ -38,8 +38,8 @@ deps/webcaret/out:
 deps/couche.d/out:
 	@echo "Compiling deps/couche.d"
 	#git submodule update --init deps/couche.d
-	#(cd deps/couche.d; git checkout master)
-	#(cd deps/couche.d; git pull origin master)
+	(cd deps/couche.d; git checkout master)
+	(cd deps/couche.d; git pull origin master)
 	mkdir -p out
 	DEBUG=${DEBUG} $(MAKE) -C deps/couche.d clean
 	DEBUG=${DEBUG} lib_build_params="-I../../../out/di ../../../out/webcaret.a" $(MAKE) -n -C deps/couche.d compile
