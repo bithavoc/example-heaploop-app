@@ -1,1 +1,4 @@
+echo "listing deps"
+ls deps/
+echo "making"
 make
