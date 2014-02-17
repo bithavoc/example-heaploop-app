@@ -1,0 +1,6 @@
+set -e
+echo "Cleaning webcaret"
+(cd deps; rm -rf webcaret/.git; ls -la)
+echo "Cleaning Couche.d"
+(cd deps;  rm -rf couche.d/.git; ls -la)
+echo "Ready to be deployed: $PWD"
