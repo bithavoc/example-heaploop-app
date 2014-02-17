@@ -1,6 +1,0 @@
-[submodule "deps/webcaret"]
-	path = deps/webcaret
-	url = https://github.com/heapsource/webcaret.git
-[submodule "deps/couche.d"]
-	path = deps/couche.d
-	url = https://github.com/heapsource/couche.d.git

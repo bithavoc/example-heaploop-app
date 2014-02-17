@@ -4,10 +4,10 @@ cd $1
 echo "Cleaning deps/*"
 rm -rf deps/*
 echo "Cloning Webcaret"
-
 (cd deps; git clone https://github.com/heapsource/webcaret.git webcaret; ls -la)
 echo "Cloning Couche.d"
 (cd deps; git clone https://github.com/heapsource/couche.d.git couche.d; ls -la)
+echo "Current DIr: $PWD"
 make
 ls out
 exit 1

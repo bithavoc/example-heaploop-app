@@ -30,8 +30,7 @@ deps/webcaret/out:
 	#(cd deps/webcaret; git checkout master)
 	#(cd deps/webcaret; git pull origin master)
 	mkdir -p out
-	DEBUG=${DEBUG} $(MAKE) -C deps/webcaret clean
-	DEBUG=${DEBUG} $(MAKE) -n -C deps/webcaret
+	(cd deps/webcaret; $(MAKE) clean; DEBUG=${DEBUG} $(MAKE))
 	cp deps/webcaret/out/webcaret.a out/
 	cp -r deps/webcaret/out/di/ out/di
 
@@ -41,8 +40,7 @@ deps/couche.d/out:
 	#(cd deps/couche.d; git checkout master)
 	#(cd deps/couche.d; git pull origin master)
 	mkdir -p out
-	DEBUG=${DEBUG} $(MAKE) -C deps/couche.d clean
-	DEBUG=${DEBUG} lib_build_params="-I../../../out/di ../../../out/webcaret.a" $(MAKE) -n -C deps/couche.d compile
+	( cd deps/couche.d; $(MAKE) clean ;DEBUG=${DEBUG} lib_build_params="-I../../../out/di ../../../out/webcaret.a" $(MAKE) compile )
 	cp deps/couche.d/out/couched.a out/
 	cp -r deps/couche.d/out/di/ out/di
 
