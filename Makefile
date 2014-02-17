@@ -26,7 +26,7 @@ deeq-api: lib/*.d deps/webcaret/out deps/couche.d/out
 
 deps/webcaret/out:
 	@echo "Compiling deps/webcaret"
-	git submodule update --init deps/webcaret
+	#git submodule update --init deps/webcaret
 	(cd deps/webcaret; git checkout master)
 	(cd deps/webcaret; git pull origin master)
 	mkdir -p out
@@ -37,7 +37,7 @@ deps/webcaret/out:
 
 deps/couche.d/out:
 	@echo "Compiling deps/couche.d"
-	git submodule update --init deps/couche.d
+	#git submodule update --init deps/couche.d
 	(cd deps/couche.d; git checkout master)
 	(cd deps/couche.d; git pull origin master)
 	mkdir -p out
