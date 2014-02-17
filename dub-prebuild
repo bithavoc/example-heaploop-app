@@ -1,6 +1,8 @@
 set -e
 echo "Switching to BUILD DIR: $1"
 cd $1
+echo "Cleaning deps/*"
+rm -rf deps/*
 echo "Cloning Webcaret"
 git clone https://github.com/heapsource/webcaret.git deps/webcaret
 echo "Cloning Couche.d"
