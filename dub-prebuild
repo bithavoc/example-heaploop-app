@@ -4,9 +4,11 @@ cd $1
 echo "Cleaning deps/*"
 rm -rf deps/*
 echo "Cloning Webcaret"
-git clone https://github.com/heapsource/webcaret.git deps/webcaret
+mkdir deps
+
+(cd deps; git clone https://github.com/heapsource/webcaret.git)
 echo "Cloning Couche.d"
-git clone https://github.com/heapsource/couche.d.git deps/couche.d
+(cd deps; git clone https://github.com/heapsource/couche.d.git)
 make
 ls out
 exit 1
