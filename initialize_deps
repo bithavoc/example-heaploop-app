@@ -2,7 +2,7 @@ set -e
 echo "Cleaning deps/*"
 rm -rf deps/*
 echo "Cloning Webcaret"
-(cd deps; git clone https://github.com/heapsource/webcaret.git webcaret; ls -la)
+(cd deps; git clone https://github.com/heapsource/webcaret.git webcaret; rm -rf couche.d/.git; ls -la)
 echo "Cloning Couche.d"
-(cd deps; git clone https://github.com/heapsource/couche.d.git couche.d; ls -la)
+(cd deps; git clone https://github.com/heapsource/couche.d.git couche.d; rm -rf couche.d/.git; ls -la)
 echo "Dependencies Initialized: $PWD"
