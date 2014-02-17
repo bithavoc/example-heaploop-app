@@ -4,7 +4,7 @@ mkdir -p deps
 echo "Cleaning deps/*"
 rm -rf deps/*
 echo "Cloning Webcaret"
-(cd deps; git clone https://github.com/heapsource/webcaret.git webcaret; rm -rf couche.d/.git; ls -la)
+(cd deps; git clone https://github.com/heapsource/webcaret.git webcaret; rm -rf webcaret/.git; ls -la)
 echo "Cloning Couche.d"
 (cd deps; git clone https://github.com/heapsource/couche.d.git couche.d; rm -rf couche.d/.git; ls -la)
 echo "Dependencies Initialized: $PWD"
