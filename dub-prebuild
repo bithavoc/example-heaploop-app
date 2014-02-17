@@ -1,3 +1,4 @@
+set -e
 echo "Current dir: $PWD"
 echo "BUILD DIR: $1"
 ls $1
