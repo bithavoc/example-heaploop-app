@@ -1,4 +1,6 @@
 set -e
+rm -rf deps
+mkdir -p deps
 echo "Cleaning deps/*"
 rm -rf deps/*
 echo "Cloning Webcaret"
