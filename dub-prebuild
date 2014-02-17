@@ -1,4 +1,5 @@
 echo "listing deps"
 ls deps/
+ls deps/couche.d
 echo "making"
 make
