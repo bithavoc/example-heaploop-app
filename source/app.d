@@ -4,6 +4,7 @@ import std.string : format;
 import couched;
 import std.json;
 import std.process : environment;
+import std.conv : to;
 
 void main() {
     loop ^^= {
@@ -68,6 +69,11 @@ void main() {
                 }
             };
         }
-        app.serve("0.0.0.0", 3000);
+        int port = 3000;
+        string portEnv = environment.get("PORT");
+        if(portEnv !is null) {
+            port = portEnv.to!int;
+        }
+        app.serve("0.0.0.0", port);
     };
 }
