@@ -3,10 +3,15 @@ import heaploop.looping;
 import std.string : format;
 import couched;
 import std.json;
+import std.process : environment;
 
 void main() {
     loop ^^= {
-        auto client = new CouchedClient("http://127.0.0.1:5984");
+        string couchedUrl = environment.get("CLOUDANT_URL");
+        if(couchedUrl is null) {
+            couchedUrl = "http://127.0.0.1:5984";
+        }
+        auto client = new CouchedClient(couchedUrl);
         CouchedDatabase tags = client.databases.tags;
         tags.ensure();
         auto app = new Application;
