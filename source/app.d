@@ -8,7 +8,7 @@ import std.conv : to;
 
 void main() {
     loop ^^= {
-        string couchedUrl = environment.get("CLOUDANT_URL");
+        string couchedUrl = environment.get("CLAUDANT_URL");
         if(couchedUrl is null) {
             couchedUrl = "http://127.0.0.1:5984";
         }
