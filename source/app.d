@@ -13,6 +13,7 @@ void main() {
         if(couchedUrl is null) {
             couchedUrl = "http://127.0.0.1:5984";
         }
+        writeln("Connecting to " ~ couchedUrl);
         auto client = new CouchedClient(couchedUrl);
         CouchedDatabase tags = client.databases.tags;
         tags.ensure();
