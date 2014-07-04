@@ -1,11 +1,14 @@
 import webcaret.application;
 import heaploop.looping;
+import heaploop.networking.http;
 import std.string : format;
 import couched;
 import std.json;
 import std.process : environment;
 import std.conv : to;
 import std.stdio;
+
+const string IdAppId = "e9f3adee2f9710cc0592e5ed03f28c9c";
 
 void main() {
     loop ^^= {
@@ -31,7 +34,62 @@ void main() {
             };
 
             get("/tags") ^ (req, res) {
-                
+                                
+            };
+
+            post("/tokens") ^ (req, res) {
+                writeln("POST to Tokens");
+                writeln("Request FORM contains %d fields", req.form.length);
+                if("code" in req.form) {
+                    string code = req.form["code"];
+                    writeln("POST Tokens is ", code);
+                    auto client = new HttpClient("http://id.bithavoc.io");
+                    //auto client = new HttpClient("http://127.0.0.1:4000");
+                    string[string] fields;
+                    fields["code"] = code;
+                    auto content = new FormUrlEncodedContent(fields);
+                    auto response = client.post("/apps/" ~ IdAppId ~ "/tokens", content);
+                    writeln("TOKENS POST RESPONSE came back from server");
+                    ubyte[] responseBuffer;
+                    response.read ^= (data) {
+                        responseBuffer ~= data.buffer;
+                    };
+                    string responseString = cast(string)responseBuffer;
+                    writeln("CLIENT RESPONSE: " ~ responseString);
+                    writeln("Status Code ", response.statusCode);
+                    if(response.statusCode == 201) {
+                        auto responseDoc = responseString.parseJSON;
+                        if(responseDoc != JSONValue.init && responseDoc.type == JSON_TYPE.OBJECT) {
+                            auto tokenValue = responseDoc.object["token"];
+                            if(tokenValue != JSONValue.init && tokenValue.type == JSON_TYPE.STRING) {
+                                string token = tokenValue.str;
+                                writeln("Token is ", token);
+                                res.statusCode = 201;
+                                res.contentType= "application/json";
+                                res.write("{\"success\": true, \"token\": \"%s\"}".format(token));
+                            } else {
+                                res.statusCode = 402;
+                                res.contentType= "application/json";
+                                res.write("{success: false, message: \"Internal token not valid\"}");
+                            }
+                        } else {
+                            res.statusCode = 402;
+                            res.contentType= "application/json";
+                            res.write("{success: false, message: \"Internal error\"}");
+                        }
+                    } else {
+                        res.statusCode = 422;
+                        res.contentType= "application/json";
+                        res.write("{success: false, message: \"Code is not valid\"}");
+                    }
+                } else {
+                    writeln("POST doesn't contain the code");
+                    res.statusCode = 422;
+                    res.contentType= "application/json";
+                    res.write("{success: false, message: \"Token is required\"}");
+                }
+                writeln("ENDING response");
+                res.end;
             };
 
             // curl -X POST -d "name=business" 0.0.0.0:3000/tags
