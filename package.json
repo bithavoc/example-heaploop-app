@@ -4,7 +4,13 @@
 	"copyright": "Copyright © 2014, thepumpkin",
 	"authors": ["thepumpkin"],
 	"dependencies": {
-        "webcaret": "~master",
-        "couched": "~master"
+        "webcaret": {
+            "version": "~master",
+            "path": "../webcaret"
+        },
+        "couched": {
+            "version": "~master",
+            "path": "../couched"
+        },
 	}
 }

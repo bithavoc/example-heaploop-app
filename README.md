@@ -1,4 +1,4 @@
-deeq-api
+example-heaploop-app
 ========
 
-Deeq Application API
+Example heaploop app
